@@ -72,8 +72,25 @@
         .module-card { transition: border-color 0.3s ease, transform 0.3s ease; }
         .module-card:hover { border-color: rgba(255,69,0,0.5); transform: translateY(-4px); }
 
-        @media (max-width: 768px) { .tk-card:nth-child(4), .tk-card:nth-child(5) { display: none; } }
-        @media (max-width: 480px) { .tk-card:nth-child(3) { display: none; } }
+        .marquee-track {
+            display: flex;
+            gap: 1rem;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        @media (max-width: 768px) {
+            .tk-card { min-width: 160px; width: 160px; }
+        }
+        @media (min-width: 769px) {
+            .tk-card { min-width: 200px; width: 200px; }
+        }
     </style>
 </head>
 <body>
@@ -209,12 +226,20 @@
             <div class="reveal mb-16 text-center">
                 <h2 class="text-4xl md:text-6xl text-white font-serif">Olha o que alunos já<br/><span style="color:#FF4500;">faturaram com o Método</span></h2>
             </div>
-            <div class="grid grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
-                <div class="tk-card reveal"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_6azue6azue6azue6%20(1).png" alt="R$ 7.456,13"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
-                <div class="tk-card reveal" style="transition-delay:100ms"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/unnamed.jpg" alt="R$ 9.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
-                <div class="tk-card reveal" style="transition-delay:200ms"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.jpg" alt="R$ 10.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
-                <div class="tk-card reveal" style="transition-delay:300ms"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_70239r70239r7023.png" alt="R$ 12.567,89"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
-                <div class="tk-card reveal" style="transition-delay:400ms"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/91077bfa-5534-4369-b2ab-e8239e25e86d.jpg" alt="R$ 4.156,21"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
+            <div class="overflow-hidden -mx-6">
+                <div class="marquee-track">
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_6azue6azue6azue6%20(1).png" alt="R$ 7.456,13"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/unnamed.jpg" alt="R$ 9.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.jpg" alt="R$ 10.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_70239r70239r7023.png" alt="R$ 12.567,89"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/91077bfa-5534-4369-b2ab-e8239e25e86d.jpg" alt="R$ 4.156,21"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
+                    <!-- Duplicado para efeito marquee infinito -->
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_6azue6azue6azue6%20(1).png" alt="R$ 7.456,13"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/unnamed.jpg" alt="R$ 9.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.jpg" alt="R$ 10.231,48"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/Gemini_Generated_Image_70239r70239r7023.png" alt="R$ 12.567,89"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
+                    <div class="tk-card"><img src="https://raw.githubusercontent.com/finoto123/M-todoViral/main/91077bfa-5534-4369-b2ab-e8239e25e86d.jpg" alt="R$ 4.156,21"><div class="tk-shade"></div><div class="tk-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
+                </div>
             </div>
             <p class="reveal text-center text-white/40 mt-10 max-w-xl mx-auto text-base leading-relaxed">Esses são resultados reais de quem aplicou o Método Viral. Alunos que começaram do zero e já estão <strong class="text-white">faturando com a trend de frutas com IA</strong>. O método que eles usaram está aqui.</p>
             <div class="reveal text-center mt-10">
