@@ -5,284 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Método Viral | Máquina de Views</title>
     <meta http-equiv="Cache-Control" content="max-age=31536000, public">
-    <meta http-equiv="Expires" content="31536000">
     <meta name="referrer" content="no-referrer">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1501581954710620');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1501581954710620&ev=PageView&noscript=1"/></noscript>
-    <!-- End Meta Pixel Code -->
-    <!-- TikTok Pixel Code Start -->
-    <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-      ttq.load('D7E3HBJC77UFKKV3CIUG');
-      ttq.page();
-    }(window, document, 'ttq');
-    </script>
-    <!-- TikTok Pixel Code End -->
-    <!-- UTMify Pixel -->
-    <script>
-      window.pixelId = "69dafd6994d7233093c256f3";
-      var a = document.createElement("script");
-      a.setAttribute("async", "");
-      a.setAttribute("defer", "");
-      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-      document.head.appendChild(a);
-    </script>
-    <!-- End UTMify Pixel -->
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #050505; color: #fff; margin: 0; overflow-x: hidden; line-height: 1.5; }
-        .fs { font-family: 'Playfair Display', serif; }
-        img { max-width: 100%; height: auto; display: block; }
-        a { text-decoration: none; color: inherit; }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background:#050505;color:#fff;font-family:'Inter',system-ui,-apple-system,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        img{max-width:100%;height:auto;display:block}
+        a{text-decoration:none;color:inherit}
 
-        /* Container */
-        .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        @media (min-width: 768px) { .wrap { padding: 0 1.5rem; } }
+        /* === LAYOUT === */
+        .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 1rem}
+        .flex{display:flex}.flex-col{flex-direction:column}.items-c{align-items:center}.items-s{align-items:flex-start}.jus-c{justify-content:center}.jus-b{justify-content:space-between}.gap3{gap:.75rem}.gap4{gap:1rem}.gap6{gap:1.5rem}.gap8{gap:2rem}
 
-        /* ===== SECTION PADDING (mobile-first) ===== */
-        .spy { padding-top: 3rem; padding-bottom: 3rem; }
-        .spylg { padding-top: 4rem; padding-bottom: 4rem; }
-        .spyxl { padding-top: 4.5rem; padding-bottom: 4.5rem; }
-        @media (min-width: 768px) {
-            .spy { padding-top: 4rem; padding-bottom: 4rem; }
-            .spylg { padding-top: 7rem; padding-bottom: 7rem; }
-            .spyxl { padding-top: 8rem; padding-bottom: 8rem; }
-        }
+        /* === NAV === */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,5,.92);border-bottom:1px solid rgba(255,255,255,.05);padding:.8rem 0;transition:padding .3s}
+        .nav-r{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+        .nav-b{font-size:.95rem;font-weight:700;letter-spacing:-.04em}
+        .nav-l{display:none;gap:1.2rem}
+        .nlk{font-size:.75rem;color:rgba(255,255,255,.4)}
+        @media(min-width:768px){.nav-l{display:flex}.wrap{padding:0 1.5rem}}
 
-        /* ===== TYPOGRAPHY (mobile-first) ===== */
-        .h1 { font-size: clamp(1.85rem, 8vw, 3.5rem); line-height: 1.0; font-weight: 500; letter-spacing: -0.02em; }
-        .h2 { font-size: clamp(1.5rem, 6vw, 2.8rem); line-height: 1.1; font-weight: 500; }
-        .h2s { font-size: clamp(1.8rem, 7vw, 3.8rem); line-height: 1.1; font-weight: 500; }
-        .h3 { font-size: clamp(1.2rem, 5vw, 2.2rem); line-height: 1.15; font-weight: 500; }
-        @media (min-width: 768px) { .h1 { font-size: clamp(2.5rem, 6.5vw, 4.5rem); } .h2 { font-size: clamp(1.8rem, 4.5vw, 3.2rem); } .h2s { font-size: clamp(2.5rem, 5.5vw, 4.5rem); } .h3 { font-size: clamp(1.8rem, 4vw, 3rem); } }
+        /* === CTA === */
+        .cta{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#FF4500;color:#fff;font-weight:700;border-radius:9999px;padding:.8rem 1.4rem;box-shadow:0 0 25px rgba(255,69,0,.3);font-size:.8rem;line-height:1.3;word-break:break-word}
+        .cta .arr{width:2rem;height:2rem;border-radius:9999px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+        .navcta{display:inline-flex;align-items:center;justify-content:center;background:#FF4500;color:#fff;font-weight:700;border-radius:9999px;padding:.5rem 1rem;box-shadow:0 0 20px rgba(255,69,0,.3);font-size:.7rem}
+        @media(min-width:480px){.cta{font-size:.9rem;padding:.9rem 1.8rem}}
+        @media(min-width:768px){.cta{font-size:1rem;padding:1rem 2rem}.navcta{font-size:.85rem;padding:.7rem 1.5rem}}
 
-        .plg { font-size: 0.92rem; line-height: 1.65; }
-        @media (min-width: 768px) { .plg { font-size: 1.1rem; } }
+        /* === HERO === */
+        .hero{min-height:100dvh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:5rem;padding-bottom:2.5rem}
+        .hero-grid{display:flex;flex-direction:column;align-items:center;gap:2rem;width:100%;position:relative;z-index:20}
+        .hc{position:relative;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;overflow:hidden;aspect-ratio:3/4;width:100%;max-width:260px;box-shadow:0 0 60px rgba(255,69,0,.1)}
+        @media(min-width:480px){.hero-grid{gap:2.5rem}.hc{max-width:300px}}
+        @media(min-width:768px){.hc{max-width:340px}}
+        @media(min-width:1024px){.hero-grid{flex-direction:row;justify-content:space-between;align-items:center;gap:3rem}.hc{margin-left:2rem}}
 
-        .c40 { color: rgba(255,255,255,0.4); }
-        .c50 { color: rgba(255,255,255,0.5); }
-        .c30 { color: rgba(255,255,255,0.3); }
-        .c20 { color: rgba(255,255,255,0.2); }
-        .c60 { color: rgba(255,255,255,0.6); }
-        .c70 { color: rgba(255,255,255,0.7); }
-        .c90 { color: rgba(255,255,255,0.9); }
-        .ac { color: #FF4500; }
-        .acbg { background: #FF4500; }
-        .warm { color: #ff8a65; }
-        .bld { font-weight: 700; }
-        .bld8 { font-weight: 800; }
-        .ltw { font-weight: 300; }
-        .it { font-style: italic; }
-        .uc { text-transform: uppercase; }
-        .ttw { text-transform: uppercase; letter-spacing: 0.1em; }
-        .ttw2 { letter-spacing: -0.04em; }
-        .tsm { font-size: 0.75rem; }
-        .txs { font-size: 0.65rem; }
-        .t14 { font-size: 0.85rem; }
-        .t16 { font-size: 1rem; }
-        .t18 { font-size: 1.1rem; }
-        .t20 { font-size: 1.25rem; }
+        /* === SPACING === */
+        .spy{padding:3rem 0}
+        .spylg{padding:4rem 0}
+        .spyxl{padding:4.5rem 0}
+        @media(min-width:768px){.spy{padding:4rem 0}.spylg{padding:7rem 0}.spyxl{padding:8rem 0}}
+        .mb3{margin-bottom:.75rem}.mb4{margin-bottom:1rem}.mb6{margin-bottom:1.5rem}.mb8{margin-bottom:2rem}.mt2{margin-top:.5rem}.mt3{margin-top:.75rem}.mt4{margin-top:1rem}.mt6{margin-top:1.5rem}.mt8{margin-top:2rem}
 
-        /* Colors */
-        .bg1 { background: #050505; }
-        .bg2 { background: #0a0a0a; }
-        .bgc { background: #111; }
-        .bgc2 { background: rgba(255,255,255,0.02); }
-        .bgc3 { background: rgba(255,255,255,0.03); }
+        /* === COLORS === */
+        .c90{color:rgba(255,255,255,.9)}.c70{color:rgba(255,255,255,.7)}.c60{color:rgba(255,255,255,.6)}.c50{color:rgba(255,255,255,.5)}.c40{color:rgba(255,255,255,.4)}.c30{color:rgba(255,255,255,.3)}.c20{color:rgba(255,255,255,.2)}
+        .ac{color:#FF4500}.acbg{background:#FF4500}.warm{color:#ff8a65}.white{color:#fff}
+        .bg2{background:#0a0a0a}.bgc{background:#111}.bgc2{background:rgba(255,255,255,.02)}.bgc3{background:rgba(255,255,255,.03)}
 
-        /* Borders */
-        .bl { border: 1px solid rgba(255,255,255,0.05); }
-        .bl2 { border: 2px solid rgba(255,69,0,0.3); }
-        .bla { border: 1px solid rgba(255,69,0,0.3); }
-        .blt { border-top: 1px solid rgba(255,255,255,0.05); }
-        .blb { border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .rl { border: 1px solid rgba(255,255,255,0.1); }
-        .r16 { border-radius: 1rem; }
-        .r20 { border-radius: 1.25rem; }
-        .r24 { border-radius: 1.5rem; }
-        .r32 { border-radius: 2rem; }
+        /* === BORDERS === */
+        .bl{border:1px solid rgba(255,255,255,.05)}.blt{border-top:1px solid rgba(255,255,255,.05)}.blb{border-bottom:1px solid rgba(255,255,255,.05)}.bla{border:1px solid rgba(255,69,0,.3)}.rl{border:1px solid rgba(255,255,255,.1)}.bl2{border:2px solid rgba(255,69,0,.3)}.r16{border-radius:1rem}.r24{border-radius:1.5rem}.r32{border-radius:2rem}
 
-        /* Reveal */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* === TYPE === */
+        h1{font-size:clamp(1.85rem,8vw,3.5rem);line-height:1;font-weight:500;letter-spacing:-.02em;font-family:'Playfair Display',serif}
+        h2{font-size:clamp(1.5rem,6vw,2.8rem);line-height:1.1;font-weight:500;font-family:'Playfair Display',serif}
+        h2s{font-size:clamp(1.8rem,7vw,3.8rem);line-height:1.1;font-weight:500;font-family:'Playfair Display',serif}
+        h3{font-size:clamp(1.2rem,5vw,2.2rem);line-height:1.15;font-weight:500;font-family:'Playfair Display',serif}
+        @media(min-width:768px){h1{font-size:clamp(2.5rem,6.5vw,4.5rem)}h2{font-size:clamp(1.8rem,4.5vw,3.2rem)}h2s{font-size:clamp(2.5rem,5.5vw,4.5rem)}h3{font-size:clamp(1.8rem,4vw,3rem)}}
+        .plg{font-size:.92rem;line-height:1.65}@media(min-width:768px){.plg{font-size:1.1rem}}
+        .fs{font-family:'Playfair Display',serif}.bld{font-weight:700}.bld8{font-weight:800}.ltw{font-weight:300}.it{font-style:italic}.uc{text-transform:uppercase}.ttw{text-transform:uppercase;letter-spacing:.1em}
 
-        /* Float */
-        @keyframes ffloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-16px) rotate(1.5deg); } }
-        .afloat { animation: ffloat 10s ease-in-out infinite; }
+        /* === TEXT & FONTS === */
+        .tsm{font-size:.75rem}.txs{font-size:.65rem}.t14{font-size:.85rem}.t16{font-size:1rem}.t18{font-size:1.1rem}.t20{font-size:1.25rem}
+        .tc{text-align:center}.ib{display:inline-block}.mx-auto{margin-left:auto;margin-right:auto}.rel{position:relative}.abs{position:absolute}.block{display:block}
 
-        /* Noise - hidden on mobile */
-        .noise { position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0.04; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-        /* CTA */
-        .cta { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #FF4500; color: #fff; font-weight: 700; border-radius: 9999px; padding: 0.8rem 1.4rem; box-shadow: 0 0 25px rgba(255,69,0,0.3); transition: all 0.3s ease; text-align: center; line-height: 1.3; word-break: break-word; font-size: 0.8rem; }
-        .cta:hover { box-shadow: 0 0 40px rgba(255,69,0,0.5); transform: scale(1.03); }
-        .cta .arr { width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
-        @media (min-width: 480px) { .cta { font-size: 0.9rem; padding: 0.9rem 1.8rem; } }
-        @media (min-width: 768px) { .cta { font-size: 1rem; padding: 1rem 2rem; } }
-
-        /* Nav CTA */
-        .navcta { display: inline-flex; align-items: center; justify-content: center; background: #FF4500; color: #fff; font-weight: 700; border-radius: 9999px; padding: 0.5rem 1rem; box-shadow: 0 0 20px rgba(255,69,0,0.3); transition: all 0.3s ease; font-size: 0.7rem; }
-        .navcta:hover { transform: scale(1.05); }
-        @media (min-width: 768px) { .navcta { font-size: 0.85rem; padding: 0.7rem 1.5rem; } }
-
-        /* Timer */
-        .timer { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem; padding: 0.5rem 0.7rem; font-weight: 800; text-align: center; min-width: 50px; color: #fff; font-variant-numeric: tabular-nums; font-size: clamp(1.1rem, 6vw, 2rem); }
-
-        /* Marquee */
-        .mqw { overflow: hidden; }
-        .mqt { display: flex; gap: 0.5rem; animation: mq 25s linear infinite; width: max-content; }
-        @keyframes mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .mqt:hover { animation-play-state: paused; }
+        /* === MARQUEE === */
+        .mqw{overflow:hidden}.mqt{display:flex;gap:.5rem;animation:mq 25s linear infinite;width:max-content}
+        @keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
         /* TK Cards */
-        .tk { position: relative; aspect-ratio: 9/16; border-radius: 1.2rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
-        .tk img { width: 100%; height: 100%; object-fit: cover; }
-        .tks { position: absolute; bottom: 0; left: 0; right: 0; height: 55%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
-        .tkb { position: absolute; bottom: 0.5rem; left: 0.5rem; display: flex; align-items: center; gap: 0.2rem; background: #FF4500; color: #fff; font-weight: 800; padding: 0.15rem 0.4rem; border-radius: 0.4rem; font-size: 0.6rem; }
-        @media (max-width: 480px) { .tk { min-width: 125px; width: 125px; } .tkb { font-size: 0.55rem; padding: 0.12rem 0.3rem; } }
-        @media (min-width: 481px) and (max-width: 768px) { .tk { min-width: 150px; width: 150px; } }
-        @media (min-width: 769px) { .tk { min-width: 200px; width: 200px; } }
+        .tk{position:relative;aspect-ratio:9/16;border-radius:1.2rem;overflow:hidden;border:1px solid rgba(255,255,255,.08);flex-shrink:0}
+        .tk img{width:100%;height:100%;object-fit:cover}
+        .tks{position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(0,0,0,.9),transparent)}
+        .tkb{position:absolute;bottom:.5rem;left:.5rem;display:flex;align-items:center;gap:.2rem;background:#FF4500;color:#fff;font-weight:800;padding:.15rem .4rem;border-radius:.4rem;font-size:.6rem}
+        @media(max-width:480px){.tk{min-width:125px;width:125px}}
+        @media(min-width:481px) and (max-width:768px){.tk{min-width:150px;width:150px}}
+        @media(min-width:769px){.tk{min-width:200px;width:200px}}
 
-        /* FAQ */
-        .fq { padding: 0.9rem 1rem; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-        .fq::after { content: '+'; font-size: 1.3rem; font-weight: 800; color: #FF4500; flex-shrink: 0; margin-left: 0.5rem; }
-        .fi.open .fq::after { content: '\2212'; }
-        .fa { display: none; padding: 0 1rem 0.8rem; font-size: 0.82rem; color: #9CA3AF; line-height: 1.6; }
-        .fi.open .fa { display: block; }
-
-        /* Card hovers */
-        .mhc { transition: border-color 0.3s ease, transform 0.3s ease; }
-        .mhc:hover { border-color: rgba(255,69,0,0.5); transform: translateY(-3px); }
-        .phc { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-        .phc:hover { border-color: rgba(255,69,0,0.6); box-shadow: 0 0 60px rgba(255,69,0,0.15); }
-
-        /* Proof icon */
-        .pi { width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: rgba(255,69,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin: 0 auto 0.6rem; }
+        /* Timer */
+        .timer{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:.75rem;padding:.5rem .7rem;font-weight:800;text-align:center;min-width:50px;font-variant-numeric:tabular-nums;font-size:clamp(1.1rem,6vw,2rem)}
 
         /* Grid */
-        .g2 { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-        .g3 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .g4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
-        @media (min-width: 768px) { .g2 { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; } .g3 { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; } }
-        @media (min-width: 1024px) { .g3 { gap: 1.5rem; } }
+        .g2{display:grid;grid-template-columns:1fr;gap:.75rem}.g3{display:grid;grid-template-columns:1fr;gap:1rem}.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+        @media(min-width:768px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr);gap:1.2rem}}
 
-        /* Flex */
-        .flex { display: flex; }
-        .flex-col { display: flex; flex-direction: column; }
-        .items-c { align-items: center; }
-        .items-s { align-items: flex-start; }
-        .jus-c { justify-content: center; }
-        .jus-b { justify-content: space-between; }
-        .gap3 { gap: 0.75rem; }
-        .gap4 { gap: 1rem; }
-        .gap6 { gap: 1.5rem; }
-        .gap8 { gap: 2rem; }
-        .tc { text-align: center; }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        .ib { display: inline-block; }
-        .rel { position: relative; }
-
-        /* Absolute helpers */
-        .abs { position: absolute; }
-
-        /* Hero */
-        .hero { min-height: 100dvh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 5rem; padding-bottom: 2.5rem; }
-        .hero-grid { display: flex; flex-direction: column; align-items: center; gap: 2rem; width: 100%; position: relative; z-index: 20; }
-        @media (min-width: 480px) { .hero-grid { gap: 2.5rem; } }
-        @media (min-width: 1024px) {
-            .hero-grid { flex-direction: row; justify-content: space-between; align-items: center; gap: 3rem; }
-            .hero-text { flex: 1; max-width: 38rem; }
-            .hero-cw { margin-left: 2rem; flex-shrink: 0; }
-        }
-        .hc { position: relative; background: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; overflow: hidden; aspect-ratio: 3/4; width: 100%; max-width: 260px; box-shadow: 0 0 60px rgba(255,69,0,0.1); }
-        @media (min-width: 480px) { .hc { max-width: 300px; } }
-        @media (min-width: 768px) { .hc { max-width: 340px; } }
-
-        /* Nav */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(5,5,5,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 0.8rem 0; transition: padding 0.3s ease; }
-        .nav-r { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
-        .nav-b { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.04em; }
-        .nav-l { display: none; gap: 1.2rem; }
-        @media (min-width: 768px) { .nav-l { display: flex; } }
-        .nlk { font-size: 0.75rem; color: rgba(255,255,255,0.4); transition: color 0.2s; }
-        .nlk:hover { color: #fff; }
-
-        /* Spacing */
-        .mb2 { margin-bottom: 0.5rem; } .mb3 { margin-bottom: 0.75rem; } .mb4 { margin-bottom: 1rem; }
-        .mb6 { margin-bottom: 1.5rem; } .mb8 { margin-bottom: 2rem; } .mb10 { margin-bottom: 2.5rem; }
-        .mb16 { margin-bottom: 3rem; } .mt2 { margin-top: 0.5rem; } .mt3 { margin-top: 0.75rem; } .mt4 { margin-top: 1rem; }
-        .mt5 { margin-top: 1.25rem; } .mt6 { margin-top: 1.5rem; } .mt8 { margin-top: 2rem; }
-        .mt10 { margin-top: 2.5rem; } .mt12 { margin-top: 3rem; }
-
-        /* Mobile hide/show */
-        .mob-hide { display: none; }
-        @media (min-width: 768px) { .mob-hide { display: inherit; } }
-        .desk-hide { display: inline-block; }
-        @media (min-width: 768px) { .desk-hide { display: none; } }
-
-        /* Stat row */
-        .stats { display: flex; align-items: center; gap: 1.5rem; }
-        .stats .sep { width: 1px; height: 2rem; background: rgba(255,255,255,0.1); }
-        .stats .sl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); display: block; }
-
-        /* Pain card */
-        .pc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 1.1rem; display: flex; gap: 0.8rem; align-items: flex-start; }
+        /* Proof icon */
+        .pi{width:2.5rem;height:2.5rem;border-radius:9999px;background:rgba(255,69,0,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .6rem}
 
         /* Badge */
-        .badge { background: rgba(255,69,0,0.1); border: 1px solid rgba(255,69,0,0.3); color: #FF4500; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.4rem 0.8rem; border-radius: 9999px; display: inline-block; }
+        .badge{background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.3);color:#FF4500;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.4rem .8rem;border-radius:9999px;display:inline-block}
+
+        /* FAQ */
+        .fq{padding:.9rem 1rem;font-weight:600;font-size:.85rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+        .fq::after{content:'+';font-size:1.3rem;font-weight:800;color:#FF4500;flex-shrink:0;margin-left:.5rem}
+        .fi.open .fq::after{content:'\2212'}
+        .fa{display:none;padding:0 1rem .8rem;font-size:.82rem;color:#9CA3AF;line-height:1.6}
+        .fi.open .fa{display:block}
 
         /* Steps */
-        .step-num { width: 3rem; height: 3rem; border-radius: 9999px; background: #FF4500; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: #fff; box-shadow: 0 0 20px rgba(255,69,0,0.3); }
-        .step-num2 { width: 3rem; height: 3rem; border-radius: 9999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: #fff; }
-        .step-card { text-align: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 1.8rem 1.2rem; }
-        @media (min-width: 768px) { .step-card { padding: 2.5rem 2rem; } }
-
-        /* Obj card */
-        .oc { background: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 1.3rem; position: relative; }
-        .oc-emoji { position: absolute; top: -0.75rem; left: 1rem; width: 2rem; height: 2rem; border-radius: 9999px; background: #FF4500; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; box-shadow: 0 0 10px rgba(255,69,0,0.4); }
-
-        /* Price */
-        .price-card-inner { background: #111; border: 2px solid rgba(255,69,0,0.3); border-radius: 2rem; padding: 2rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
-        @media (min-width: 768px) { .price-card-inner { padding: 2.5rem; } }
-
-        /* Guarantee */
-        .gcard { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,69,0,0.3); border-radius: 2rem; padding: 1.5rem; text-align: center; }
-        @media (min-width: 768px) { .gcard { padding: 2.5rem; } }
-        .gbadge { width: 4.5rem; height: 4.5rem; border-radius: 9999px; background: rgba(255,69,0,0.2); border: 2px solid rgba(255,69,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+        .step-num2{width:3rem;height:3rem;border-radius:9999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-weight:700;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#fff}
+        .step-card{text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.8rem 1.2rem}
+        .oc{background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem;position:relative}
+        .oc-emoji{position:absolute;top:-.75rem;left:1rem;width:2rem;height:2rem;border-radius:9999px;background:#FF4500;display:flex;align-items:center;justify-content:center;font-size:.8rem;box-shadow:0 0 10px rgba(255,69,0,.4)}
+        .gbadge{width:4.5rem;height:4.5rem;border-radius:9999px;background:rgba(255,69,0,.2);border:2px solid rgba(255,69,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.2rem}
 
         /* Footer */
-        .footer-r { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
-        @media (min-width: 768px) { .footer-r { flex-direction: row; justify-content: space-between; } }
-        .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; }
-        .footer-links a { font-size: 0.75rem; color: rgba(255,255,255,0.3); transition: color 0.2s; }
-        .footer-links a:hover { color: #fff; }
+        .footer-r{display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+        @media(min-width:768px){.footer-r{flex-direction:row;justify-content:space-between}}
+        .footer-links{display:flex;flex-wrap:wrap;gap:1rem}
+        .footer-links a{font-size:.75rem;color:rgba(255,255,255,.3)}
 
-        /* ===== Disable expensive things on mobile ===== */
-        @media (max-width: 768px) { .noise { display: none; } .afloat { animation: none; } }
+        /* Reveal - content visible by default, reveal ONLY adds animation for above-fold */
+        .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+        .reveal.active{opacity:1;transform:translateY(0)}
     </style>
 </head>
 <body>
-<div class="bg1" style="min-height:100vh;">
-    <div class="noise"></div>
+<div style="min-height:100vh">
 
     <!-- NAV -->
     <nav id="main-nav" class="nav">
@@ -293,51 +130,51 @@
                 <a href="#offer" class="nlk">Oferta</a>
                 <a href="#faq" class="nlk">FAQ</a>
             </div>
-            <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="nav-cta" class="navcta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">Quero o Método</a>
+            <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="navcta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">Quero o Método</a>
         </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero" id="inicio">
-        <div class="abs" style="top:0;right:0;width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,0.05);filter:blur(120px);"></div>
-        <div class="abs" style="bottom:0;left:0;width:14rem;height:14rem;border-radius:9999px;background:rgba(255,69,0,0.03);filter:blur(100px);"></div>
+        <div class="abs" style="top:0;right:0;width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,.05);filter:blur(120px)"></div>
+        <div class="abs" style="bottom:0;left:0;width:14rem;height:14rem;border-radius:9999px;background:rgba(255,69,0,.03);filter:blur(100px)"></div>
         <div class="wrap hero-grid">
             <div id="hero-content-wrapper" class="hero-text">
-                <div class="reveal">
+                <div class="reveal" id="r1">
                     <span class="badge">🔥 Trend no pico — método liberado agora</span>
                 </div>
-                <div class="reveal" style="transition-delay:150ms">
-                    <h1 class="h1 fs c90 mb4">
+                <div class="reveal" id="r2" style="transition-delay:150ms">
+                    <h1 class="c90 mb4">
                         A Fruta que<br>Virou Febre no<br>
-                        <span class="warm it ltw" style="text-shadow:0 0 40px rgba(255,69,0,0.3);">TikTok Pode<br>Te Pagar</span><br>
+                        <span class="warm it ltw" style="text-shadow:0 0 40px rgba(255,69,0,.3)">TikTok Pode<br>Te Pagar</span><br>
                         <span class="ac">Esse Mês</span>
                     </h1>
                 </div>
-                <div class="reveal" style="transition-delay:300ms">
-                    <p class="plg c60 ltw mb6" style="max-width:28rem;line-height:1.7;">Descubra como criar, vender e lucrar com a trend de frutas com IA — do zero, sem aparecer e sem precisar de seguidores.</p>
+                <div class="reveal" id="r3" style="transition-delay:300ms">
+                    <p class="plg c60 ltw mb6" style="max-width:28rem;line-height:1.7">Descubra como criar, vender e lucrar com a trend de frutas com IA — do zero, sem aparecer e sem precisar de seguidores.</p>
                 </div>
-                <div class="reveal flex flex-col items-s gap4" style="transition-delay:450ms;">
-                    <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="hero-cta" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">
+                <div class="reveal reveal-block" style="transition-delay:450ms">
+                    <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">
                         QUERO APRENDER A MONETIZAR AGORA <span class="arr">→</span>
                     </a>
-                    <a href="#product" class="tsm c30" style="transition:color 0.2s;">Entender o método ↓</a>
+                    <a href="#product" class="tsm c30 block mt3" style="transition:color .2s">Entender o método ↓</a>
                 </div>
-                <div class="reveal stats mt8" style="transition-delay:600ms;">
-                    <div><span class="block text-white t18 bld" data-count="2400">0</span><span class="sl">alunos</span></div>
-                    <span class="sep"></span>
-                    <div><span class="block text-white t18 bld" data-count="897">0</span><span class="sl">essa semana</span></div>
-                    <span class="sep"></span>
-                    <div><span class="block text-white t18 bld">4.9 ⭐</span><span class="sl">avaliação</span></div>
+                <div class="reveal reveal-flex" id="r4" style="transition-delay:600ms">
+                    <div><span class="block text-white t18 bld" data-count="2400">0</span><span class="tsm c30 ttw block">alunos</span></div>
+                    <span class="sep" style="width:1px;height:2rem;background:rgba(255,255,255,.1);margin:0 0"></span>
+                    <div><span class="block text-white t18 bld" data-count="897">0</span><span class="tsm c30 ttw block">essa semana</span></div>
+                    <span style="width:1px;height:2rem;background:rgba(255,255,255,.1)"></span>
+                    <div><span class="block text-white t18 bld">4.9 ⭐</span><span class="tsm c30 ttw block">avaliação</span></div>
                 </div>
             </div>
-            <div class="reveal afloat hero-cw" style="transition-delay:200ms;">
+            <div class="reveal" id="r5" style="transition-delay:200ms">
                 <div class="hc">
-                    <img src="Three_fruit_characters_202604101719.webp" alt="Método Viral" loading="eager" fetchpriority="high" width="669" height="1200">
-                    <div class="abs acbg white txs uc bld" style="top:0.8rem;right:0.8rem;color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;padding:0.3rem 0.65rem;border-radius:9999px;box-shadow:0 0 15px rgba(255,69,0,0.5);">ACESSO IMEDIATO</div>
-                    <div class="abs" style="bottom:0.8rem;left:0.8rem;right:0.8rem;border-radius:0.75rem;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);padding:0.85rem;border:1px solid rgba(255,255,255,0.1);">
+                    <img src="Three_fruit_characters_202604101719.webp" alt="Método Viral" loading="eager" fetchpriority="high" width="669" height="1200" decoding="async">
+                    <div class="abs" style="top:.8rem;right:.8rem"><span class="txs uc bld" style="background:#FF4500;color:#fff;font-size:.6rem;font-weight:700;padding:.3rem .65rem;border-radius:9999px;box-shadow:0 0 15px rgba(255,69,0,.5)">ACESSO IMEDIATO</span></div>
+                    <div class="abs" style="bottom:.8rem;left:.8rem;right:.8rem"><div style="border-radius:.75rem;background:rgba(0,0,0,.7);padding:.85rem;border:1px solid rgba(255,255,255,.1)">
                         <p class="t14 bld white">Método Viral</p>
                         <p class="txs c50">Guia completo para monetizar a trend</p>
-                    </div>
+                    </div></div>
                 </div>
             </div>
         </div>
@@ -345,36 +182,36 @@
 
     <!-- PROOF BAR -->
     <section class="spy bg2 blt blb">
-        <div class="wrap g4 items-c" style="text-align:center;align-items:center;justify-items:center;">
-            <div class="reveal"><div class="pi">📱</div><h4 class="bld tsm">Sem Aparecer</h4><p class="txs c40 mt2">100% anônimo</p></div>
-            <div class="reveal" style="transition-delay:100ms"><div class="pi">✅</div><h4 class="bld tsm">Zero Experiência</h4><p class="txs c40 mt2">Para iniciantes absolutos</p></div>
-            <div class="reveal" style="transition-delay:200ms"><div class="pi">💰</div><h4 class="bld tsm">Monetização Rápida</h4><p class="txs c40 mt2">3 formas de gerar renda</p></div>
-            <div class="reveal" style="transition-delay:300ms"><div class="pi">⚡</div><h4 class="bld tsm">Acesso Imediato</h4><p class="txs c40 mt2">Começa a aplicar ainda hoje</p></div>
+        <div class="wrap g4 items-c" style="text-align:center;align-items:center;justify-items:center">
+            <div class="reveal"><div class="pi">📱</div><h4 class="bld tsm white">Sem Aparecer</h4><p class="txs c40 mt2">100% anônimo</p></div>
+            <div class="reveal" style="transition-delay:100ms"><div class="pi">✅</div><h4 class="bld tsm white">Zero Experiência</h4><p class="txs c40 mt2">Para iniciantes absolutos</p></div>
+            <div class="reveal" style="transition-delay:200ms"><div class="pi">💰</div><h4 class="bld tsm white">Monetização Rápida</h4><p class="txs c40 mt2">3 formas de gerar renda</p></div>
+            <div class="reveal" style="transition-delay:300ms"><div class="pi">⚡</div><h4 class="bld tsm white">Acesso Imediato</h4><p class="txs c40 mt2">Começa a aplicar ainda hoje</p></div>
         </div>
     </section>
 
     <!-- PAIN -->
     <section class="spylg rel" id="pain">
         <div class="wrap">
-            <div style="max-width:42rem;margin:0 auto;text-align:center;" class="reveal">
-                <h2 class="h2 fs c90 mb3">Você viu. Parou.<br><span class="it" style="color:rgba(255,255,255,0.5);">Mas não agiu.</span></h2>
+            <div style="max-width:42rem;margin:0 auto;text-align:center" class="reveal">
+                <h2 class="c90 mb3">Você viu. Parou.<br><span class="it" style="color:rgba(255,255,255,.5)">Mas não agiu.</span></h2>
                 <p class="plg c40 ltw">Parece familiar? É exatamente o que está acontecendo...</p>
             </div>
-            <div class="g2 mt8" style="max-width:56rem;margin-left:auto;margin-right:auto;">
-                <div class="reveal pc">
-                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:0.7rem;flex-shrink:0;">1</div>
+            <div class="g2 mt8" style="max-width:56rem;margin-left:auto;margin-right:auto">
+                <div class="reveal" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start">
+                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:.7rem;flex-shrink:0">1</div>
                     <p class="c70 t14">Você vê vídeos de frutas com IA com <strong class="white">16 milhões de views</strong> e pensa: como isso viralizou?</p>
                 </div>
-                <div class="reveal pc" style="transition-delay:100ms">
-                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:0.7rem;flex-shrink:0;">2</div>
+                <div class="reveal" style="transition-delay:100ms;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start">
+                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:.7rem;flex-shrink:0">2</div>
                     <p class="c70 t14">Você assiste, curte, compartilha — e <strong class="white">não ganha um centavo</strong> com isso.</p>
                 </div>
-                <div class="reveal pc" style="transition-delay:200ms">
-                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:0.7rem;flex-shrink:0;">3</div>
+                <div class="reveal" style="transition-delay:200ms;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start">
+                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:.7rem;flex-shrink:0">3</div>
                     <p class="c70 t14">Você acha que precisa de seguidores ou experiência. <strong class="white">Errado. Precisa de método.</strong></p>
                 </div>
-                <div class="reveal pc" style="transition-delay:300ms">
-                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:0.7rem;flex-shrink:0;">4</div>
+                <div class="reveal" style="transition-delay:300ms;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start">
+                    <div class="acbg white bld flex items-c jus-c" style="width:1.8rem;height:1.8rem;border-radius:9999px;color:#fff;font-size:.7rem;flex-shrink:0">4</div>
                     <p class="c70 t14">Enquanto você hesita, tem gente <strong class="white">construindo canal do zero</strong> e monetizando essa onda agora.</p>
                 </div>
             </div>
@@ -388,36 +225,36 @@
     <section class="spyxl rel" id="product">
         <div class="wrap">
             <div class="reveal tc mb8">
-                <h2 class="h3 fs white">O que você vai<br><span class="it warm">dominar com o Método Viral</span></h2>
+                <h3 class="white">O que você vai<br><span class="it warm">dominar com o Método Viral</span></h3>
             </div>
-            <div class="g3" style="max-width:64rem;margin-left:auto;margin-right:auto;">
-                <div class="reveal mhc bgc rl r16" style="padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">🎨</div>
+            <div class="g3" style="max-width:64rem;margin-left:auto;margin-right:auto">
+                <div class="reveal reveal-card" style="background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">🎨</div>
                     <h4 class="bld t16 mb2">Criação do Zero</h4>
                     <p class="c40 t14">Você vai criar seu primeiro vídeo de fruta com IA ainda hoje. Sem câmera, sem microfone, sem experiência.</p>
                 </div>
-                <div class="reveal mhc bgc rl r16" style="transition-delay:100ms;padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">📈</div>
+                <div class="reveal reveal-card" style="transition-delay:100ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">📈</div>
                     <h4 class="bld t16 mb2">Viralizar no TikTok</h4>
                     <p class="c40 t14">O algoritmo favorece quem usa trend no momento certo. Você vai aprender a chegar na hora certa.</p>
                 </div>
-                <div class="reveal mhc bgc rl r16" style="transition-delay:200ms;padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">💰</div>
+                <div class="reveal reveal-card" style="transition-delay:200ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">💰</div>
                     <h4 class="bld t16 mb2">Monetização Rápida</h4>
                     <p class="c40 t14">Views sem monetização é vaidade. Aqui você aprende as 3 formas de transformar atenção em dinheiro real.</p>
                 </div>
-                <div class="reveal mhc bgc rl r16" style="transition-delay:300ms;padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">🛠️</div>
+                <div class="reveal reveal-card" style="transition-delay:300ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">🛠️</div>
                     <h4 class="bld t16 mb2">Ferramentas Gratuitas</h4>
                     <p class="c40 t14">Tudo que você precisa já existe e é gratuito. O método te mostra exatamente quais usar e como.</p>
                 </div>
-                <div class="reveal mhc bgc rl r16" style="transition-delay:400ms;padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">⚠️</div>
+                <div class="reveal reveal-card" style="transition-delay:400ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">⚠️</div>
                     <h4 class="bld t16 mb2">O Erro Fatal</h4>
                     <p class="c40 t14">90% das pessoas erram no mesmo ponto e desistem antes de ver resultado. Você não vai cometer esse erro.</p>
                 </div>
-                <div class="reveal mhc bgc rl r16" style="transition-delay:500ms;padding:1.3rem;">
-                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,0.2);font-size:1.2rem;margin-bottom:0.8rem;">📊</div>
+                <div class="reveal reveal-card" style="transition-delay:500ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem">
+                    <div class="flex items-c jus-c mb4" style="width:2.4rem;height:2.4rem;border-radius:9999px;background:rgba(255,69,0,.2);font-size:1.2rem;margin-bottom:.8rem">📊</div>
                     <h4 class="bld t16 mb2">Escalar sem Esforço</h4>
                     <p class="c40 t14">Um canal vira dois. Dois viram quatro. O método te mostra como escalar sem dobrar o trabalho.</p>
                 </div>
@@ -429,47 +266,47 @@
     <section class="spylg bg2 blt blb" id="proof">
         <div class="wrap">
             <div class="reveal tc mb8">
-                <h2 class="h2s fs white">Olha o que alunos já<br><span class="ac">faturaram com o Método</span></h2>
+                <h2 class="h2s white">Olha o que alunos já<br><span class="ac">faturaram com o Método</span></h2>
             </div>
             <div class="mqw">
                 <div class="mqt">
-                    <div class="tk"><img src="Gemini_Generated_Image_6azue6azue6azue6 (1).webp" alt="R$ 7.456,13" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
-                    <div class="tk"><img src="unnamed.webp" alt="R$ 9.231,48" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
-                    <div class="tk"><img src="1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.webp" alt="R$ 10.231,48" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
-                    <div class="tk"><img src="Gemini_Generated_Image_70239r70239r7023.webp" alt="R$ 12.567,89" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
-                    <div class="tk"><img src="91077bfa-5534-4369-b2ab-e8239e25e86d.webp" alt="R$ 4.156,21" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
-                    <div class="tk"><img src="Gemini_Generated_Image_6azue6azue6azue6 (1).webp" alt="R$ 7.456,13" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
-                    <div class="tk"><img src="unnamed.webp" alt="R$ 9.231,48" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
-                    <div class="tk"><img src="1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.webp" alt="R$ 10.231,48" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
-                    <div class="tk"><img src="Gemini_Generated_Image_70239r70239r7023.webp" alt="R$ 12.567,89" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
-                    <div class="tk"><img src="91077bfa-5534-4369-b2ab-e8239e25e86d.webp" alt="R$ 4.156,21" loading="lazy"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
+                    <div class="tk"><img src="Gemini_Generated_Image_6azue6azue6azue6 (1).webp" alt="R$ 7.456,13" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
+                    <div class="tk"><img src="unnamed.webp" alt="R$ 9.231,48" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
+                    <div class="tk"><img src="1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.webp" alt="R$ 10.231,48" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
+                    <div class="tk"><img src="Gemini_Generated_Image_70239r70239r7023.webp" alt="R$ 12.567,89" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
+                    <div class="tk"><img src="91077bfa-5534-4369-b2ab-e8239e25e86d.webp" alt="R$ 4.156,21" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
+                    <div class="tk"><img src="Gemini_Generated_Image_6azue6azue6azue6 (1).webp" alt="R$ 7.456,13" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 7.456,13</div></div>
+                    <div class="tk"><img src="unnamed.webp" alt="R$ 9.231,48" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 9.231,48</div></div>
+                    <div class="tk"><img src="1ef61a4d-e86c-4d14-9ec4-12015abdc4a3.webp" alt="R$ 10.231,48" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 10.231,48</div></div>
+                    <div class="tk"><img src="Gemini_Generated_Image_70239r70239r7023.webp" alt="R$ 12.567,89" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 12.567,89</div></div>
+                    <div class="tk"><img src="91077bfa-5534-4369-b2ab-e8239e25e86d.webp" alt="R$ 4.156,21" loading="lazy" decoding="async"><div class="tks"></div><div class="tkb"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>R$ 4.156,21</div></div>
                 </div>
             </div>
-            <p class="reveal tc c40 t14 mt6" style="max-width:36rem;margin-left:auto;margin-right:auto;line-height:1.6;">Esses são resultados reais de quem aplicou o Método Viral. Alunos que começaram do zero e já estão <strong class="white">faturando com a trend de frutas com IA</strong>. O método que eles usaram está aqui.</p>
+            <p class="reveal tc c40 t14 mt6" style="max-width:36rem;margin-left:auto;margin-right:auto;line-height:1.6">Esses são resultados reais de quem aplicou o Método Viral. Alunos que começaram do zero e já estão <strong class="white">faturando com a trend de frutas com IA</strong>. O método que eles usaram está aqui.</p>
             <div class="reveal tc mt6">
-                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="prova-cta" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO APRENDER O MÉTODO <span class="arr">→</span></a>
+                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO APRENDER O MÉTODO <span class="arr">→</span></a>
             </div>
         </div>
     </section>
 
     <!-- URGENCY -->
     <section class="spylg rel" id="urgency">
-        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);width:24rem;height:24rem;border-radius:9999px;background:rgba(255,69,0,0.05);filter:blur(120px);"></div>
-        <div class="wrap tc rel" style="z-index:10;">
-            <div class="reveal"><h2 class="h2s fs white mb6">Essa janela está <span class="it warm">fechando.</span></h2></div>
-            <div class="reveal" style="transition-delay:150ms;">
-                <p class="plg c50 mb8" style="max-width:42rem;margin-left:auto;margin-right:auto;">Toda trend tem um pico. Quem chegou cedo está colhendo agora. Quem chegar tarde vai encontrar o <strong class="white">mercado saturado</strong>. Você ainda está no tempo certo — mas esse tempo tem limite.</p>
+        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);width:24rem;height:24rem;border-radius:9999px;background:rgba(255,69,0,.05);filter:blur(120px)"></div>
+        <div class="wrap tc rel" style="z-index:10">
+            <div class="reveal"><h2 class="h2s white mb6">Essa janela está <span class="it warm">fechando.</span></h2></div>
+            <div class="reveal" style="transition-delay:150ms">
+                <p class="plg c50 mb8" style="max-width:42rem;margin-left:auto;margin-right:auto">Toda trend tem um pico. Quem chegou cedo está colhendo agora. Quem chegar tarde vai encontrar o <strong class="white">mercado saturado</strong>. Você ainda está no tempo certo — mas esse tempo tem limite.</p>
             </div>
-            <div class="reveal ib bgc3 bla r16 mb8" style="padding:0.8rem 1.3rem;transform:rotate(-1deg);">
+            <div class="reveal ib bgc3 bla r16 mb8" style="padding:.8rem 1.3rem;transform:rotate(-1deg)">
                 <span class="t18 bld fs it white">O momento certo é agora.</span>
             </div>
-            <div class="reveal flex items-c jus-c gap4 mt4" style="transition-delay:350ms;">
+            <div class="reveal flex items-c jus-c gap4 mt4" style="transition-delay:350ms">
                 <div class="tc"><div class="timer" id="timer-min">15</div><span class="txs c30 ttw mt2 ib">min</span></div>
-                <span class="t20 bld c20" style="padding-bottom:0.3rem;">:</span>
+                <span class="t20 bld c20" style="padding-bottom:.3rem">:</span>
                 <div class="tc"><div class="timer" id="timer-sec">00</div><span class="txs c30 ttw mt2 ib">seg</span></div>
             </div>
-            <div class="reveal mt8" style="transition-delay:500ms;">
-                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="urgency-cta" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">ENTRAR AGORA QUE AINDA DÁ TEMPO <span class="arr">→</span></a>
+            <div class="reveal mt8" style="transition-delay:500ms">
+                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="cta" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">ENTRAR AGORA QUE AINDA DÁ TEMPO <span class="arr">→</span></a>
             </div>
         </div>
     </section>
@@ -477,22 +314,22 @@
     <!-- OBJECTIONS -->
     <section class="spyxl bg2 blt blb" id="objections">
         <div class="wrap">
-            <div class="reveal tc mb12"><h2 class="h3 fs white">Suas dúvidas,<br><span class="it warm">respondidas</span></h2></div>
-            <div class="g3" style="max-width:64rem;margin-left:auto;margin-right:auto;">
-                <div class="reveal oc">
-                    <div class="oc-emoji">🤔</div>
+            <div class="reveal tc mb12"><h3 class="white">Suas dúvidas,<br><span class="it warm">respondidas</span></h3></div>
+            <div class="g3" style="max-width:64rem;margin-left:auto;margin-right:auto">
+                <div class="reveal" style="background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem;position:relative">
+                    <div style="position:absolute;top:-.75rem;left:1rem;width:2rem;height:2rem;border-radius:9999px;background:#FF4500;display:flex;align-items:center;justify-content:center;font-size:.8rem;box-shadow:0 0 10px rgba(255,69,0,.4)">🤔</div>
                     <div class="bld t16 mt6 mb2">"Mas eu não entendo nada de IA…"</div>
-                    <p class="c40 t14" style="line-height:1.6;">Não precisa saber nada. O Método Viral foi construído para quem <strong class="white">nunca abriu uma ferramenta de IA na vida</strong>. Se você sabe mexer no TikTok, você consegue.</p>
+                    <p class="c40 t14" style="line-height:1.6">Não precisa saber nada. O Método Viral foi construído para quem <strong class="white">nunca abriu uma ferramenta de IA na vida</strong>. Se você sabe mexer no TikTok, você consegue.</p>
                 </div>
-                <div class="reveal oc" style="transition-delay:150ms;">
-                    <div class="oc-emoji">👥</div>
+                <div class="reveal" style="transition-delay:150ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem;position:relative">
+                    <div style="position:absolute;top:-.75rem;left:1rem;width:2rem;height:2rem;border-radius:9999px;background:#FF4500;display:flex;align-items:center;justify-content:center;font-size:.8rem;box-shadow:0 0 10px rgba(255,69,0,.4)">👥</div>
                     <div class="bld t16 mt6 mb2">"Já tem muita gente fazendo isso…"</div>
-                    <p class="c40 t14" style="line-height:1.6;">Tem muita gente fazendo. Tem pouca gente fazendo <strong class="white">do jeito certo</strong>. Esse é o método que separa quem viraliza de quem posta no vazio.</p>
+                    <p class="c40 t14" style="line-height:1.6">Tem muita gente fazendo. Tem pouca gente fazendo <strong class="white">do jeito certo</strong>. Esse é o método que separa quem viraliza de quem posta no vazio.</p>
                 </div>
-                <div class="reveal oc" style="transition-delay:300ms;">
-                    <div class="oc-emoji">💰</div>
+                <div class="reveal" style="transition-delay:300ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.3rem;position:relative">
+                    <div style="position:absolute;top:-.75rem;left:1rem;width:2rem;height:2rem;border-radius:9999px;background:#FF4500;display:flex;align-items:center;justify-content:center;font-size:.8rem;box-shadow:0 0 10px rgba(255,69,0,.4)">💰</div>
                     <div class="bld t16 mt6 mb2">"Vale R$47,90?"</div>
-                    <p class="c40 t14" style="line-height:1.6;">Se você fizer <strong class="white">uma única venda</strong> usando o que vai aprender, já pagou o método mais de 10 vezes. O risco real é ficar de fora.</p>
+                    <p class="c40 t14" style="line-height:1.6">Se você fizer <strong class="white">uma única venda</strong> usando o que vai aprender, já pagou o método mais de 10 vezes. O risco real é ficar de fora.</p>
                 </div>
             </div>
         </div>
@@ -502,23 +339,23 @@
     <section class="spyxl rel" id="how-it-works">
         <div class="wrap">
             <div class="reveal tc mb8">
-                <h2 class="h3 fs white">3 passos entre você<br>e a <span class="it warm">primeira venda</span></h2>
+                <h3 class="white">3 passos entre você<br>e a <span class="it warm">primeira venda</span></h3>
                 <p class="c30 mt3 t16">Sem enrolação. Sem complicação.</p>
             </div>
-            <div class="g3" style="max-width:60rem;margin-left:auto;margin-right:auto;">
-                <div class="reveal step-card">
-                    <div class="step-num">1</div>
+            <div class="g3" style="max-width:60rem;margin-left:auto;margin-right:auto">
+                <div class="reveal" style="text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.8rem 1.2rem">
+                    <div style="width:3rem;height:3rem;border-radius:9999px;background:#FF4500;font-weight:700;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#fff;box-shadow:0 0 20px rgba(255,69,0,.3)">1</div>
                     <span class="t20 mb3 block">⚡</span>
                     <h4 class="bld t18 mb2">Acessa o Método</h4>
                     <p class="c40 t14">Em segundos você recebe o acesso. Sem espera, sem complicação. Direto no seu e-mail.</p>
                 </div>
-                <div class="reveal step-card" style="transition-delay:150ms;">
+                <div class="reveal" style="transition-delay:150ms;text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.8rem 1.2rem">
                     <div class="step-num2">2</div>
                     <span class="t20 mb3 block">🎬</span>
                     <h4 class="bld t18 mb2">Cria seu primeiro vídeo</h4>
                     <p class="c40 t14">Segue o passo a passo e publica seu primeiro vídeo de fruta com IA ainda hoje.</p>
                 </div>
-                <div class="reveal step-card" style="transition-delay:300ms;">
+                <div class="reveal" style="transition-delay:300ms;text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1.8rem 1.2rem">
                     <div class="step-num2">3</div>
                     <span class="t20 mb3 block">💸</span>
                     <h4 class="bld t18 mb2">Vídeo trabalha por você</h4>
@@ -530,35 +367,35 @@
 
     <!-- PRICING -->
     <section class="spyxl bg2 blt blb rel" id="offer">
-        <div class="abs" style="top:33%;right:0;width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,0.05);filter:blur(100px);"></div>
-        <div class="wrap rel" style="z-index:10;">
+        <div class="abs" style="top:33%;right:0;width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,.05);filter:blur(100px)"></div>
+        <div class="wrap rel" style="z-index:10">
             <div class="reveal tc mb8">
                 <span class="badge">🔥 Oferta limitada</span>
-                <h2 class="h2s fs white mt3">Garante seu acesso agora</h2>
+                <h2 class="h2s white mt3">Garante seu acesso agora</h2>
                 <p class="c30 mt3 t16">Sem mensalidade. Sem pegadinhas. Acesso vitalício.</p>
             </div>
-            <div style="max-width:28rem;margin-left:auto;margin-right:auto;">
-                <div class="reveal phc price-card-inner">
-                    <div class="abs" style="top:1.2rem;right:1.2rem;"><span class="acbg white ttw2 txs uc bld" style="color:#fff;font-size:0.6rem;font-weight:700;letter-spacing:0.05em;padding:0.25rem 0.6rem;border-radius:9999px;box-shadow:0 0 10px rgba(255,69,0,0.4);">⭐ ACESSO COMPLETO</span></div>
+            <div style="max-width:28rem;margin-left:auto;margin-right:auto">
+                <div class="reveal" style="background:#111;border:2px solid rgba(255,69,0,.3);border-radius:2rem;padding:2rem 1.5rem;text-align:center;position:relative;overflow:hidden">
+                    <div class="abs" style="top:1.2rem;right:1.2rem"><span class="acbg ttw2 txs uc bld" style="color:#fff;font-size:.6rem;font-weight:700;padding:.25rem .6rem;border-radius:9999px;box-shadow:0 0 10px rgba(255,69,0,.4)">⭐ ACESSO COMPLETO</span></div>
                     <h3 class="t20 bld fs white mb6 mt3">Método Viral</h3>
                     <div class="flex items-c jus-c gap4 mb2">
-                        <span class="t14 c30" style="text-decoration:line-through;">R$97,00</span>
-                        <span class="bld8 white t20" style="font-size:clamp(2rem,8vw,3.2rem);letter-spacing:-0.03em;">R$47<span class="c50" style="font-size:clamp(1rem,4vw,1.6rem);">,90</span></span>
+                        <span class="t14 c30" style="text-decoration:line-through">R$97,00</span>
+                        <span class="bld8 white t20" style="font-size:clamp(2rem,8vw,3.2rem);letter-spacing:-.03em">R$47<span class="c50" style="font-size:clamp(1rem,4vw,1.6rem)">,90</span></span>
                     </div>
                     <p class="txs c20 uc ttw mb6">Pagamento único · Sem mensalidade</p>
-                    <ul class="text-left t14 c50 mb6 bl blb" style="padding:1rem 0;text-align:left;">
-                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0;">✓</span>Método completo de criação com IA</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>Passo a passo para viralizar no TikTok</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>As 3 formas de monetizar rapidamente</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>Ferramentas gratuitas que os criadores usam</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>O erro fatal que 90% cometem (e como evitar)</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>Estratégia de escalonamento de canais</li>
-                        <li class="flex items-c gap3 mb3"><span class="ac bld" style="flex-shrink:0;">✓</span>Atualizações futuras sem custo adicional</li>
-                        <li class="flex items-c gap3"><span class="ac bld" style="flex-shrink:0;">✓</span>Suporte por e-mail</li>
+                    <ul class="t14 c50 mb6 bl blb" style="padding:1rem 0;text-align:left">
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Método completo de criação com IA</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Passo a passo para viralizar no TikTok</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>As 3 formas de monetizar rapidamente</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Ferramentas gratuitas que os criadores usam</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>O erro fatal que 90% cometem (e como evitar)</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Estratégia de escalonamento de canais</li>
+                        <li class="flex items-c gap3 mb3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Atualizações futuras sem custo adicional</li>
+                        <li class="flex items-c gap3"><span class="ac bld flex-shrink-0" style="flex-shrink:0">✓</span>Suporte por e-mail</li>
                     </ul>
-                    <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="offer-cta" class="cta" style="width:100%;" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO O MÉTODO AGORA <span class="arr">→</span></a>
+                    <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="cta" style="width:100%" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO O MÉTODO AGORA <span class="arr">→</span></a>
                     <div class="flex items-c jus-c gap6 mt4 txs c30">
-                        <span class="flex items-c gap3"><span class="rl bgc3" style="padding:0.1rem 0.35rem;border-radius:0.25rem;font-size:0.55rem;font-weight:700;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">PIX</span>PIX</span>
+                        <span class="flex items-c gap3"><span class="rl bgc3" style="padding:.1rem .35rem;border-radius:.25rem;font-size:.55rem;font-weight:700;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">PIX</span>PIX</span>
                         <span class="flex items-c gap3">💳Cartão</span>
                     </div>
                 </div>
@@ -569,14 +406,14 @@
     <!-- GUARANTEE -->
     <section class="spylg rel" id="guarantee">
         <div class="wrap">
-            <div class="reveal" style="max-width:28rem;margin-left:auto;margin-right:auto;">
-                <div class="gcard">
+            <div class="reveal reveal-block" style="max-width:28rem;margin-left:auto;margin-right:auto">
+                <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,69,0,.3);border-radius:2rem;padding:1.5rem;text-align:center">
                     <div class="gbadge">
                         <span class="t20 bld8 ac fs">7</span>
                         <span class="txs ac uc ttw bld">dias</span>
                     </div>
                     <h2 class="t20 bld fs white mb3">Risco zero. Sério.</h2>
-                    <p class="c40 t14" style="line-height:1.65;">Você tem <strong class="white">7 dias para aplicar o método</strong>. Se não gostar por qualquer motivo, é só mandar um e-mail e devolvemos <strong class="white">100% do valor</strong>. Sem burocracia, sem perguntas, sem enrolação.</p>
+                    <p class="c40 t14" style="line-height:1.65">Você tem <strong class="white">7 dias para aplicar o método</strong>. Se não gostar por qualquer motivo, é só mandar um e-mail e devolvemos <strong class="white">100% do valor</strong>. Sem burocracia, sem perguntas, sem enrolação.</p>
                     <p class="c20 t14 mt3 it">Você não tem nada a perder. Só a chance de continuar de fora.</p>
                 </div>
             </div>
@@ -586,25 +423,25 @@
     <!-- FAQ -->
     <section class="spyxl bg2 blt blb" id="faq">
         <div class="wrap">
-            <div class="reveal tc mb8"><h2 class="h3 fs white">Perguntas<br><span class="it warm">Frequentes</span></h2></div>
-            <div style="max-width:36rem;margin-left:auto;margin-right:auto;">
-                <div class="fi reveal bgc rl r16 mb3" style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:0.85rem;margin-bottom:0.6rem;overflow:hidden;">
+            <div class="reveal tc mb8"><h3 class="white">Perguntas<br><span class="it warm">Frequentes</span></h3></div>
+            <div style="max-width:36rem;margin-left:auto;margin-right:auto">
+                <div class="fi reveal" style="background:#111;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;margin-bottom:.6rem;overflow:hidden">
                     <div class="fq white">Preciso ter experiência com IA?</div>
                     <div class="fa">Não! O Método Viral foi feito para quem nunca usou nenhuma ferramenta de IA na vida. Tudo é explicado passo a passo, do zero absoluto.</div>
                 </div>
-                <div class="fi reveal bgc rl r16 mb3" style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:0.85rem;margin-bottom:0.6rem;transition-delay:100ms;overflow:hidden;">
+                <div class="fi reveal" style="transition-delay:100ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;margin-bottom:.6rem;overflow:hidden">
                     <div class="fq white">Preciso aparecer nos vídeos?</div>
                     <div class="fa">Não. Você não precisa mostrar o rosto nem usar sua voz. O método é 100% anônimo — sua identidade fica intacta.</div>
                 </div>
-                <div class="fi reveal bgc rl r16 mb3" style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:0.85rem;margin-bottom:0.6rem;transition-delay:200ms;overflow:hidden;">
+                <div class="fi reveal" style="transition-delay:200ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;margin-bottom:.6rem;overflow:hidden">
                     <div class="fq white">Funciona mesmo ou é só mais hype?</div>
                     <div class="fa">A trend é real e ainda está no pico. Os canais mostrados acima são reais e públicos — você pode verificar agora mesmo no TikTok. Quem entra agora ainda tem vantagem competitiva.</div>
                 </div>
-                <div class="fi reveal bgc rl r16 mb3" style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:0.85rem;margin-bottom:0.6rem;transition-delay:300ms;overflow:hidden;">
+                <div class="fi reveal" style="transition-delay:300ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;margin-bottom:.6rem;overflow:hidden">
                     <div class="fq white">Quanto tempo leva para ver resultado?</div>
                     <div class="fa">Seguindo o método, dá para publicar o primeiro vídeo no mesmo dia. Resultados de views costumam aparecer nas primeiras 48h de publicação.</div>
                 </div>
-                <div class="fi reveal bgc rl r16 mb3" style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:0.85rem;margin-bottom:0.6rem;transition-delay:400ms;overflow:hidden;">
+                <div class="fi reveal" style="transition-delay:400ms;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:.85rem;margin-bottom:.6rem;overflow:hidden">
                     <div class="fq white">Como recebo o acesso?</div>
                     <div class="fa">Imediatamente após o pagamento, o acesso é enviado para o seu e-mail. É digital, instantâneo e vitalício — você acessa quando quiser, pelo celular ou computador.</div>
                 </div>
@@ -614,119 +451,135 @@
 
     <!-- FINAL CTA -->
     <section class="spyxl rel" id="final-cta">
-        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,0.05);filter:blur(100px);"></div>
-        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);font-size:15vw;font-weight:800;color:rgba(255,255,255,0.02);user-select:none;pointer-events:none;white-space:nowrap;" class="fs">VIRAL</div>
-        <div class="wrap tc rel" style="z-index:10;">
-            <div class="reveal"><h2 class="h2s fs white mb4">Você vai continuar<br>só assistindo?</h2></div>
-            <div class="reveal" style="transition-delay:150ms;"><p class="c40 plg ltw mb8" style="max-width:26rem;margin-left:auto;margin-right:auto;">Ou vai ser um dos que aprendeu o método e monetizou enquanto a trend ainda estava no pico.</p></div>
-            <div class="reveal" style="transition-delay:300ms;">
-                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" id="footer-cta" class="cta" style="padding:1rem 2.2rem;font-size:0.9rem;" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO MONETIZAR AGORA <span class="arr">→</span></a>
+        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);width:20rem;height:20rem;border-radius:9999px;background:rgba(255,69,0,.05);filter:blur(100px)"></div>
+        <div class="abs" style="top:50%;left:50%;transform:translate(-50%,-50%);font-size:15vw;font-weight:800;color:rgba(255,255,255,.02);user-select:none;pointer-events:none;white-space:nowrap" class="fs">VIRAL</div>
+        <div class="wrap tc rel" style="z-index:10">
+            <div class="reveal"><h2 class="h2s white mb4">Você vai continuar<br>só assistindo?</h2></div>
+            <div class="reveal" style="transition-delay:150ms"><p class="c40 plg ltw mb8" style="max-width:26rem;margin-left:auto;margin-right:auto">Ou vai ser um dos que aprendeu o método e monetizou enquanto a trend ainda estava no pico.</p></div>
+            <div class="reveal" style="transition-delay:300ms">
+                <a href="https://ggcheckout.app/checkout/v2/sA0lgYzNQWrd8fRIvnWM" class="cta" style="padding:1rem 2.2rem;font-size:.9rem" onclick="try{fbq('track','InitiateCheckout',{content_name:'Método Viral das Frutas',content_category:'Produto Digital',currency:'BRL',value:47.90,num_items:1})}catch(e){}">QUERO MONETIZAR AGORA <span class="arr">→</span></a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="spy blt bg1">
+    <footer class="spy blt" style="background:#050505">
         <div class="wrap footer-r">
             <div class="footer-links">
-                <a href="#" style="transition:color 0.2s;">Política de Privacidade</a>
-                <a href="#" style="transition:color 0.2s;">Termos de Uso</a>
-                <a href="#" style="transition:color 0.2s;">Suporte</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Suporte</a>
             </div>
             <div class="tc">
                 <p class="t18 bld ttw2 fs c20">Método Viral<span class="ac">.</span></p>
-                <p class="txs mt2" style="color:rgba(255,255,255,0.06);">&copy; 2025 — Produto digital. Resultados podem variar.</p>
+                <p class="txs mt2" style="color:rgba(255,255,255,.06)">&copy; 2025 — Produto digital. Resultados podem variar.</p>
             </div>
         </div>
     </footer>
 </div>
 
+<!-- PIXELS (deferred so they never block first paint) -->
+<script defer>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1501581954710620');
+fbq('track', 'PageView');
+</script>
+<script defer>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D7E3HBJC77UFKKV3CIUG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<script defer>
+  window.pixelId = "69dafd6994d7233093c256f3";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
 <script>
-    /* Reveal */
-    const rObs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+    /* Font loading - non-blocking */
+    var link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap';
+    document.head.appendChild(link);
 
     /* Nav shrink */
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-        nav.style.padding = window.scrollY > 50 ? '0.55rem 0' : '';
-    }, { passive: true });
+    var nav=document.getElementById('main-nav');
+    window.addEventListener('scroll',function(){
+        if(window.scrollY>50){nav.style.padding='.55rem 0'}else{nav.style.padding='.8rem 0'}
+    },{passive:true});
 
-    /* Hero parallax - only on desktop */
-    if (window.innerWidth > 1023) {
-        const hw = document.getElementById('hero-content-wrapper');
-        if (hw) {
-            window.addEventListener('scroll', () => {
-                const s = window.scrollY;
-                if (s < 1200) {
-                    hw.style.transform = 'translateY(' + (s * 0.2) + 'px)';
-                    hw.style.opacity = Math.max(0, 1 - s / 1000);
-                }
-            }, { passive: true });
-        }
+    /* Reveal on scroll - only run if not mobile for better perf */
+    if(window.innerWidth>768||('ontouchstart' in window===false)){
+        var rObs=new IntersectionObserver(function(entries){
+            entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('active')});
+        },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.reveal').forEach(function(el){rObs.observe(el)});
     }
 
     /* FAQ toggle */
-    document.querySelectorAll('.fq').forEach(q => {
-        q.addEventListener('click', () => {
-            const item = q.parentElement;
-            const was = item.classList.contains('open');
-            document.querySelectorAll('.fi.open').forEach(i => i.classList.remove('open'));
-            if (!was) item.classList.add('open');
+    document.querySelectorAll('.fq').forEach(function(q){
+        q.addEventListener('click',function(){
+            var item=q.parentElement;
+            var was=item.classList.contains('open');
+            document.querySelectorAll('.fi.open').forEach(function(i){i.classList.remove('open')});
+            if(!was)item.classList.add('open');
         });
     });
 
     /* Smooth scroll */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', function(e) {
-            const t = document.querySelector(this.getAttribute('href'));
-            if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.addEventListener('click',function(e){
+            var t=document.querySelector(this.getAttribute('href'));
+            if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
         });
     });
 
     /* Count-up */
-    function animCount(el, target) {
-        let start = 0;
-        const step = target / (1500 / 16);
-        const timer = setInterval(() => {
-            start += step;
-            if (start >= target) {
-                el.textContent = target >= 1000 ? (target/1000).toFixed(1).replace('.',',') + 'K+' : target + '+';
+    function animCount(el,target){
+        var start=0;
+        var step=target/(1500/16);
+        var timer=setInterval(function(){
+            start+=step;
+            if(start>=target){
+                el.textContent=target>=1000?(target/1000).toFixed(1).replace('.',',')+'K+':target+'+';
                 clearInterval(timer);
-            } else {
-                el.textContent = target >= 1000 ? (start/1000).toFixed(1).replace('.',',') + 'K' : Math.floor(start).toString();
+            }else{
+                el.textContent=target>=1000?(start/1000).toFixed(1).replace('.',',')+'K':Math.floor(start).toString();
             }
-        }, 16);
+        },16);
     }
-    const cObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) { animCount(e.target, parseInt(e.target.dataset.count)); cObs.unobserve(e.target); }
-        });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+    var cObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){animCount(e.target,parseInt(e.target.dataset.count));cObs.unobserve(e.target)}});
+    },{threshold:0.5});
+    document.querySelectorAll('[data-count]').forEach(function(el){cObs.observe(el)});
 
-    /* Countdown - persists in sessionStorage */
-    let remaining;
-    const stored = sessionStorage.getItem('mv_timer');
-    if (stored && parseInt(stored) > 0) {
-        remaining = parseInt(stored);
-    } else {
-        remaining = 15 * 60;
-    }
-    const minEl = document.getElementById('timer-min');
-    const secEl = document.getElementById('timer-sec');
-    function renderTimer() {
-        minEl.textContent = String(Math.floor(remaining / 60)).padStart(2, '0');
-        secEl.textContent = String(remaining % 60).padStart(2, '0');
-        sessionStorage.setItem('mv_timer', remaining);
+    /* Timer */
+    var remaining;
+    var stored=sessionStorage.getItem('mv_timer');
+    if(stored&&parseInt(stored)>0){remaining=parseInt(stored)}else{remaining=15*60}
+    var minEl=document.getElementById('timer-min');
+    var secEl=document.getElementById('timer-sec');
+    function renderTimer(){
+        minEl.textContent=String(Math.floor(remaining/60)).padStart(2,'0');
+        secEl.textContent=String(remaining%60).padStart(2,'0');
+        sessionStorage.setItem('mv_timer',remaining);
     }
     renderTimer();
-    setInterval(() => {
-        remaining = remaining <= 0 ? 15 * 60 : remaining - 1;
-        renderTimer();
-    }, 1000);
+    setInterval(function(){remaining=remaining<=0?15*60:remaining-1;renderTimer()},1000);
 </script>
 </body>
 </html>
